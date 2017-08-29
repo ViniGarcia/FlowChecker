@@ -1,4 +1,4 @@
-"Time","Source","Destiny","SrcPort","DstPort","Protocol","Frame","Ack","Payload"
+"Time","Source","Destination","SrcPort","DstPort","Protocol","Frame","Ack","Payload"
 "0.000000","fe:54:00:9b:0a:6d","Spanning-tree-(for-bridges)_00","","","STP","1","","Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002"
 "1.099389","192.168.121.10","192.168.122.20","46246","9000","TCP","2","","46246 > 9000 [SYN] Seq=0 Win=29200 Len=0 MSS=1460 SACK_PERM=1 TSval=646876 TSecr=0 WS=128"
 "1.099762","RealtekU_76:4c:7c","RealtekU_9b:0a:6d","","","ARP","3","","Who has 192.168.121.10?  Tell 192.168.121.1"

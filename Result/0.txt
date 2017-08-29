@@ -1,8 +1,8 @@
-Time,Source,Destiny,SrcPort,DstPort,Protocol,Frame,Ack
-0.000000,1,Spanning-tree-(for-bridges)_00,,,STP,1,
-2.000202,1,Spanning-tree-(for-bridges)_00,,,STP,248,
-3.999961,1,Spanning-tree-(for-bridges)_00,,,STP,525,
-5.999962,1,Spanning-tree-(for-bridges)_00,,,STP,1117,
-7.999995,1,Spanning-tree-(for-bridges)_00,,,STP,1564,
-10.000080,1,Spanning-tree-(for-bridges)_00,,,STP,2082,
-12.000075,1,Spanning-tree-(for-bridges)_00,,,STP,2140,
+Time,Source,Destiny,SrcPort,DstPort,Protocol,Frame,Ack,Payload
+0.000000,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,1,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+2.000202,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,248,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+3.999961,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,525,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+5.999962,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,1117,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+7.999995,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,1564,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+10.000080,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,2082,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
+12.000075,fe:54:00:9b:0a:6d,Spanning-tree-(for-bridges)_00,,,STP,2140,,Conf. Root = 32768/0/fe:54:00:76:4c:7c  Cost = 0  Port = 0x8002
