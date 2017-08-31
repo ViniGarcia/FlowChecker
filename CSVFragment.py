@@ -84,7 +84,7 @@ class CSVFragment:
                 resultFile += flow + '_'
                 csvFile = open(filePath)
                 resultDict.append(DictReader(csvFile))
-            resultFile += '.txt'
+        resultFile += '.txt'
 
         packetHeader = ['Time', 'Source', 'Destiny', 'SrcPort', 'DstPort', 'Protocol', 'Frame', 'Ack', 'Payload']
         packetsInfo = open(resultFile, 'w')
@@ -98,8 +98,8 @@ class CSVFragment:
         for packet in packetsList:
             packetsWriter.writerow(packet)
 
-lala = CSVFragment()
-data = lala.getServiceFlows('FlowTest.csv')
-lala.persistServiceFlows(data)
-lala.readServiceFlows('Result')
-lala.unifyFlowsTraffic('Result', ['5','6','7'])
+#lala = CSVFragment()
+#data = lala.getServiceFlows('FlowTest.csv')
+#lala.persistServiceFlows(data)
+#lala.readServiceFlows('Result')
+#lala.unifyFlowsTraffic('Result', ['5','7'])
