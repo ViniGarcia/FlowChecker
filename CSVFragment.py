@@ -18,7 +18,7 @@ class CSVFragment:
         flowsPackets = []
 
         for packet in csvDict:
-            flow = {'Src':packet['Source'], 'Dst':packet['Destiny'], 'SrcPort':packet['SrcPort'], 'DstPort':packet['DstPort'], 'Serv':packet['Protocol']}
+            flow = {'Src':packet['Source'], 'Dst':packet['Destination'], 'SrcPort':packet['SrcPort'], 'DstPort':packet['DstPort'], 'Serv':packet['Protocol']}
 
             if flow not in flowsList:
                 flowsList.append(flow)
@@ -35,7 +35,7 @@ class CSVFragment:
         if not isdir('Result'):
             mkdir('Result')
         flowInfo = open('Result/1.InfoFile.txt', 'w')
-        packetHeader = ['Time','Source','Destiny','SrcPort','DstPort','Protocol','Frame','Ack','Payload']
+        packetHeader = ['Time','Source','Destination','SrcPort','DstPort','Protocol','Frame','Ack','Bytes','Payload']
 
         for flow in flowsData[0]:
             flowInfo.write("ID: " + str(flowsData[0].index(flow)) + "\nSource: " + str(flow['Src']))
@@ -64,7 +64,7 @@ class CSVFragment:
             packets = []
             for packet in csvDict:
                 packets.append(packet)
-            flow = {'Src': packet['Source'], 'Dst': packet['Destiny'], 'SrcPort': packet['SrcPort'], 'DstPort': packet['DstPort'], 'Serv': packet['Protocol']}
+            flow = {'Src': packet['Source'], 'Dst': packet['Destination'], 'SrcPort': packet['SrcPort'], 'DstPort': packet['DstPort'], 'Serv': packet['Protocol']}
             flowsList.append(flow)
             flowsPackets.append(packets)
 
@@ -86,7 +86,7 @@ class CSVFragment:
                 resultDict.append(DictReader(csvFile))
         resultFile += '.txt'
 
-        packetHeader = ['Time', 'Source', 'Destiny', 'SrcPort', 'DstPort', 'Protocol', 'Frame', 'Ack', 'Payload']
+        packetHeader = ['Time', 'Source', 'Destination', 'SrcPort', 'DstPort', 'Protocol', 'Frame', 'Ack', 'Bytes', 'Payload']
         packetsInfo = open(resultFile, 'w')
         packetsWriter = DictWriter(packetsInfo, packetHeader, delimiter=',')
         packetsWriter.writeheader()
@@ -98,8 +98,8 @@ class CSVFragment:
         for packet in packetsList:
             packetsWriter.writerow(packet)
 
-#lala = CSVFragment()
-#data = lala.getServiceFlows('FlowTest.csv')
-#lala.persistServiceFlows(data)
-#lala.readServiceFlows('Result')
-#lala.unifyFlowsTraffic('Result', ['5','7'])
+lala = CSVFragment()
+data = lala.getServiceFlows('FlowTest.csv')
+lala.persistServiceFlows(data)
+lala.readServiceFlows('Result')
+lala.unifyFlowsTraffic('Result', ['5','7'])

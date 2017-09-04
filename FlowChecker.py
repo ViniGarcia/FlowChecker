@@ -38,9 +38,26 @@ class FlowChecker:
 
         return rttData
 
-    #def getJitter(self, rttData):
+    def getJitter(self, rttData):
 
-    def getThroughput(self):
+        self.directFlowFile.seek(0)
+        directFlowDict = DictReader(self.directFlowFile)
+
+        jitterData = {}
+        for packets in directFlowDict:
+            if packets['Frame'] in rttData:
+                jitterData.update({packets['Frame']:packets['Time']})
+
+        jitterResult = {}
+        jitterData = sorted(jitterData.items(), key=lambda frame: int(frame[0]))
+        jitterResult.update({jitterData[0][0] : 0})
+        for index in range(1, len(jitterData)):
+            jitterResult.update({jitterData[index][0]:(float(jitterData[index][1])-jitterResult[jitterData[index-1][0]])})
+
+        return jitterResult
+
+
+    def getPPS(self):
 
         self.directFlowFile.seek(0)
         directFlowDict = sorted(DictReader(self.directFlowFile), key=lambda k: float(k['Time']))
@@ -60,6 +77,29 @@ class FlowChecker:
             packetsAmount += 1
         if packetsAmount > 0:
             packetsPerSecond.update({currentTime: packetsAmount})
+
+        return packetsPerSecond
+
+    def getThroughput(self):
+
+        self.directFlowFile.seek(0)
+        directFlowDict = sorted(DictReader(self.directFlowFile), key=lambda k: float(k['Time']))
+        packetsPerSecond = {}
+        currentTime = 1
+        initialTime = None
+        bytesAmount = 0
+
+        for packet in directFlowDict:
+            if initialTime == None:
+                initialTime = float(packet['Time'])
+            if float(packet['Time']) - initialTime >= 1:
+                packetsPerSecond.update({currentTime:bytesAmount})
+                initialTime = float(packet['Time'])
+                currentTime += 1
+                bytesAmount = 0
+            bytesAmount += int(packet['Bytes'])
+        if bytesAmount > 0:
+            packetsPerSecond.update({currentTime:bytesAmount})
 
         return packetsPerSecond
 
@@ -87,7 +127,10 @@ class FlowChecker:
 
         return errorsPerSecond
 
-lala = FlowChecker('5_7_.txt', '6.txt')
-print lala.getRTT()
-print lala.getErrors()
-print lala.getThroughput()
+#lala = FlowChecker('5_7_.txt', '6.txt')
+#rtt = lala.getRTT()
+#print sorted(rtt.items(), key = lambda frame : int(frame[0]))
+#print sorted(lala.getJitter(rtt).items(), key = lambda frame : int(frame[0]))
+#print lala.getErrors()
+#print lala.getPPS()
+#print lala.getThroughput()
