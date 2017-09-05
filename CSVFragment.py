@@ -98,8 +98,8 @@ class CSVFragment:
         for packet in packetsList:
             packetsWriter.writerow(packet)
 
-lala = CSVFragment()
-data = lala.getServiceFlows('FlowTest.csv')
-lala.persistServiceFlows(data)
-lala.readServiceFlows('Result')
-lala.unifyFlowsTraffic('Result', ['5','7'])
+#lala = CSVFragment()
+#data = lala.getServiceFlows('FlowTest.csv')
+#lala.persistServiceFlows(data)
+#lala.readServiceFlows('Result')
+#lala.unifyFlowsTraffic('Result', ['5','7'])

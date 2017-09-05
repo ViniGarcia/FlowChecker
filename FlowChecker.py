@@ -41,18 +41,23 @@ class FlowChecker:
     def getJitter(self, rttData):
 
         self.directFlowFile.seek(0)
+        self.reverseFlowFile.seek(0)
         directFlowDict = DictReader(self.directFlowFile)
+        reverseFlowDict = DictReader(self.reverseFlowFile)
 
         jitterData = {}
         for packets in directFlowDict:
             if packets['Frame'] in rttData:
                 jitterData.update({packets['Frame']:packets['Time']})
+        for packets in reverseFlowDict:
+            if packets['Ack'] != '':
+                jitterData.update({packets['Frame']: packets['Time']})
 
         jitterResult = {}
         jitterData = sorted(jitterData.items(), key=lambda frame: int(frame[0]))
         jitterResult.update({jitterData[0][0] : 0})
         for index in range(1, len(jitterData)):
-            jitterResult.update({jitterData[index][0]:(float(jitterData[index][1])-jitterResult[jitterData[index-1][0]])})
+            jitterResult.update({jitterData[index][0]:(float(jitterData[index][1])- float(jitterData[index-1][1]))})
 
         return jitterResult
 
