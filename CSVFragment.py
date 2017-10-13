@@ -30,11 +30,11 @@ class CSVFragment:
         return [flowsList, flowsPackets]
 
 
-    def persistServiceFlows(self, flowsData):
+    def persistServiceFlows(self, flowsData, filePath):
 
-        if not isdir('Result'):
-            mkdir('Result')
-        flowInfo = open('Result/1.InfoFile.txt', 'w')
+        if not isdir(filePath + '/Result'):
+            mkdir(filePath + '/Result')
+        flowInfo = open(filePath + '/Result/1.InfoFile.txt', 'w')
         packetHeader = ['Time','Source','Destination','SrcPort','DstPort','Protocol','Frame','Ack','Bytes','Payload']
 
         for flow in flowsData[0]:
@@ -42,7 +42,7 @@ class CSVFragment:
             flowInfo.write("\nDestiny: " + str(flow['Dst']) + "\nSrcPort: " + str(flow['SrcPort']))
             flowInfo.write("\nDstPort: " + str(flow['DstPort']) + "\nService: " + str(flow['Serv']) + "\n\n")
 
-            packetsInfo = open("Result/" + str(flowsData[0].index(flow)) + ".txt", 'w')
+            packetsInfo = open(filePath + "/Result/" + str(flowsData[0].index(flow)) + ".txt", 'w')
             packetsWriter = DictWriter(packetsInfo, packetHeader, delimiter=',')
             packetsWriter.writeheader()
             for packet in flowsData[1][flowsData[0].index(flow)]:
@@ -73,9 +73,9 @@ class CSVFragment:
     def unifyFlowsTraffic(self, flowsFolder, flowsNumber):
 
         if not isdir(flowsFolder):
-            return
+            return -1
 
-        resultFile = ""
+        resultFile = flowsFolder + '/'
         resultDict = []
 
         for flow in flowsNumber:
@@ -84,6 +84,8 @@ class CSVFragment:
                 resultFile += flow + '_'
                 csvFile = open(filePath)
                 resultDict.append(DictReader(csvFile))
+            else:
+                return -1
         resultFile += '.txt'
 
         packetHeader = ['Time', 'Source', 'Destination', 'SrcPort', 'DstPort', 'Protocol', 'Frame', 'Ack', 'Bytes', 'Payload']
@@ -98,8 +100,4 @@ class CSVFragment:
         for packet in packetsList:
             packetsWriter.writerow(packet)
 
-#lala = CSVFragment()
-#data = lala.getServiceFlows('FlowTest.csv')
-#lala.persistServiceFlows(data)
-#lala.readServiceFlows('Result')
-#lala.unifyFlowsTraffic('Result', ['5','7'])
+        return 0

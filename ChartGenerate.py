@@ -1,7 +1,5 @@
 from FlowChecker import FlowChecker
 from csv import DictReader
-from decimal import getcontext, Decimal
-
 
 class ChartGenerate:
 
@@ -108,6 +106,3 @@ class ChartGenerate:
         chart = self.makeChartDocument(chart)
         chartFile = open(chartPath, 'w')
         chartFile.write(chart)
-
-#lala = ChartGenerate('5_7_.txt', '6.txt')
-#lala.getFullAnalysis('charts.tex')
